@@ -548,7 +548,7 @@
 
     /* ── Responsive ── */
     @media (max-width: 1024px) {
-      .hero { grid-template-columns: 1fr; padding: 60px 48px 80px; min-height: auto; padding-top: calc(var(--nav-h) + 40px); }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: calc(var(--nav-h) + 48px) 48px 80px; }
       .hero-right { display: none; }
       .work-card { grid-template-columns: 1fr; gap: 16px; }
       .work-card-arrow { display: none; }
@@ -560,13 +560,16 @@
       nav { padding: 0 32px; }
     }
     @media (max-width: 640px) {
-      .hero { padding: 60px 24px 60px; }
+      .hero { padding: calc(var(--nav-h) + 36px) 24px 60px; }
+      .hero-right { display: none; }
+      .hero-headline { font-size: clamp(2.8rem, 11vw, 3.6rem); }
       .articles-grid { grid-template-columns: 1fr; }
-      section { padding: 60px 24px; }
+      section { padding: 56px 24px; }
       .section-divider { margin: 0 24px; }
       footer { padding: 40px 24px; }
+      footer .footer-links { flex-wrap: wrap; gap: 16px; }
       nav { padding: 0 20px; }
-      .nav-links { gap: 20px; }
+      .nav-hide-mobile { display: none; }
     }
   </style>
 </head>
@@ -576,9 +579,9 @@
   <nav id="navbar">
     <div class="nav-logo">Patrick Le-Tran</div>
     <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#articles">Articles</a></li>
-      <li><a href="resume.pdf" download="Patrick_LeTran_Resume.pdf">Resume</a></li>
+      <li class="nav-hide-mobile"><a href="#work">Work</a></li>
+      <li class="nav-hide-mobile"><a href="#articles">Articles</a></li>
+      <li class="nav-hide-mobile"><a href="resume.pdf" download="Patrick_LeTran_Resume.pdf">Resume</a></li>
       <li><a href="mailto:patrickjmvtran@gmail.com" class="nav-cta">Get in touch</a></li>
     </ul>
   </nav>
