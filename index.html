@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patrick Le-Tran — Product & Marketing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --creme:        #F5F0E8;
+      --creme-dark:   #EDE7D9;
+      --matcha:       #7A9E7E;
+      --matcha-dark:  #5B7A5F;
+      --matcha-light: #D6E8D8;
+      --black:        #1A1A1A;
+      --gray:         #6B6B6B;
+      --light-gray:   #E2DDD5;
+      --white:        #FFFFFF;
+      --radius:       12px;
+      --nav-h:        68px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--creme);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.28 0 0 0 0 0.23 0 0 0 0 0.18 0 0 0 0.055 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--light-gray);
+      z-index: 100;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-cta {
+      background: var(--black);
+      color: var(--creme) !important;
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--matcha-dark) !important; transform: translateY(-1px); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      padding-top: calc(var(--nav-h) + 56px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+    .hero-left { display: flex; flex-direction: column; gap: 32px; }
+    .hero-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.6rem, 7vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .hero-headline em {
+      font-style: normal;
+      background: linear-gradient(
+        90deg,
+        var(--matcha) 0%,
+        var(--matcha) 30%,
+        #c8e8cb 48%,
+        #eaf5eb 50%,
+        #c8e8cb 52%,
+        var(--matcha) 70%,
+        var(--matcha) 100%
+      );
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glisten 4s ease-in-out infinite;
+    }
+    @keyframes glisten {
+      0%   { background-position: 100% center; }
+      50%  { background-position: -100% center; }
+      100% { background-position: 100% center; }
+    }
+    .hero-body {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--gray);
+      max-width: 580px;
+      font-weight: 400;
+    }
+    .hero-body strong { color: var(--black); font-weight: 600; }
+    .hero-body .hl {
+      font-weight: 700;
+      color: var(--matcha-dark);
+      text-decoration: underline;
+      text-decoration-color: var(--matcha);
+      text-underline-offset: 3px;
+      text-decoration-thickness: 2px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--black);
+      color: var(--creme);
+      padding: 14px 28px;
+      border-radius: 99px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--matcha-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--black);
+      padding: 14px 28px;
+      border-radius: 99px;
+      border: 1.5px solid var(--light-gray);
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'Space Grotesk', sans-serif;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { border-color: var(--matcha); transform: translateY(-2px); }
+
+    /* Video */
+    .hero-right { position: relative; }
+    .video-wrapper {
+      position: relative;
+      background: var(--creme-dark);
+      border-radius: 20px;
+      border: 1.5px solid var(--light-gray);
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    .video-placeholder-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--matcha-light) 0%, var(--creme-dark) 60%);
+      opacity: 0.5;
+    }
+    .video-play-btn {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      background: var(--black);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+    .video-play-btn:hover { transform: scale(1.08); background: var(--matcha-dark); }
+    .video-play-btn svg { margin-left: 4px; }
+    .video-label {
+      position: relative;
+      font-size: 0.85rem;
+      color: var(--gray);
+      font-weight: 500;
+      text-align: center;
+    }
+    .video-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--white);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+    .video-badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--matcha);
+      border-radius: 50%;
+    }
+    .video-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--matcha-dark);
+    }
+
+    /* ── Section Layout ── */
+    section { padding: 100px 80px; }
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--matcha);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      letter-spacing: 0.03em;
+      line-height: 1;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 56px;
+      font-weight: 400;
+    }
+
+    /* ── Work Section ── */
+    #work { background: var(--white); }
+    .work-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* Row-style work cards */
+    .work-card {
+      background: var(--white);
+      border-radius: 0;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--light-gray);
+      display: grid;
+      grid-template-columns: 260px 1fr auto;
+      gap: 48px;
+      align-items: start;
+      transition: background 0.2s;
+      position: relative;
+    }
+    .work-card:first-child { border-top: 1px solid var(--light-gray); }
+    .work-card:hover { background: var(--creme); }
+
+    .work-card-left {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .work-card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--matcha-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .work-card-company {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gray);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .work-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--black);
+    }
+    .work-card-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--matcha-dark);
+      background: var(--matcha-light);
+      padding: 4px 10px;
+      border-radius: 99px;
+      width: fit-content;
+    }
+
+    .work-card-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .work-card-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--gray);
+      font-weight: 400;
+    }
+    .work-card-metrics {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .metric-val {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--matcha-dark);
+    }
+    .metric-label {
+      font-size: 0.68rem;
+      color: var(--gray);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .work-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      background: var(--creme-dark);
+      border-radius: 99px;
+      color: var(--black);
+      border: 1px solid var(--light-gray);
+    }
+
+    .work-card-arrow {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 4px;
+    }
+    .arrow-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid var(--light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+    .arrow-link:hover {
+      background: var(--black);
+      border-color: var(--black);
+      color: var(--creme);
+      transform: translate(2px, -2px);
+    }
+    .arrow-link svg { transition: color 0.2s; }
+
+    /* ── Articles Section ── */
+    #articles { background: var(--creme); }
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .article-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--light-gray);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.07);
+    }
+    .article-card-img {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .article-card-body { padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .article-card-cat {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--matcha);
+    }
+    .article-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .article-card-desc {
+      font-size: 0.83rem;
+      color: var(--gray);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .article-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-top: 1px solid var(--light-gray);
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+    .article-card-footer span { font-weight: 500; }
+    .coming-soon-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      background: var(--matcha-light);
+      color: var(--matcha-dark);
+      padding: 3px 9px;
+      border-radius: 99px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--black);
+      color: var(--creme);
+      padding: 60px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .footer-left { display: flex; flex-direction: column; gap: 16px; }
+    .footer-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+    }
+    .footer-tagline { font-size: 0.9rem; color: rgba(245,240,232,0.5); line-height: 1.65; font-weight: 400; }
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 20px;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.55);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--matcha-light); }
+    .footer-copy { font-size: 0.75rem; color: rgba(245,240,232,0.3); }
+    .footer-email {
+      font-size: 0.9rem;
+      color: var(--matcha-light);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-email:hover { color: var(--white); }
+
+    /* ── Divider ── */
+    .section-divider {
+      height: 1px;
+      background: var(--light-gray);
+      margin: 0 80px;
+    }
+
+    /* ── Scroll fade-in ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; padding: 60px 48px 80px; min-height: auto; padding-top: calc(var(--nav-h) + 40px); }
+      .hero-right { display: none; }
+      .work-card { grid-template-columns: 1fr; gap: 16px; }
+      .work-card-arrow { display: none; }
+      .articles-grid { grid-template-columns: 1fr 1fr; }
+      section { padding: 72px 48px; }
+      .section-divider { margin: 0 48px; }
+      footer { padding: 48px; grid-template-columns: 1fr; }
+      .footer-right { align-items: flex-start; }
+      nav { padding: 0 32px; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 60px 24px 60px; }
+      .articles-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 24px; }
+      .section-divider { margin: 0 24px; }
+      footer { padding: 40px 24px; }
+      nav { padding: 0 20px; }
+      .nav-links { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav id="navbar">
+    <div class="nav-logo">Patrick Le-Tran</div>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="resume.pdf" download="Patrick_LeTran_Resume.pdf">Resume</a></li>
+      <li><a href="mailto:patrickjmvtran@gmail.com" class="nav-cta">Get in touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="home">
+    <div class="hero-left fade-up">
+      <h1 class="hero-headline">
+        Shaping the<br />
+        product &amp; <em>narrative</em><br />
+        so it can fly<br />
+        off the shelf.
+      </h1>
+      <p class="hero-body">
+        Hey I'm <span class="hl">Patrick</span>! A product-minded operator obsessed with the full stack of building: figuring out the right thing to sell, designing it for the right audience, and getting it in their hands.<br /><br />
+        I love working across all things product — design, engineering, marketing, and the business side. The connective tissue between all of them is where I thrive.<br /><br />
+        Currently, I'm an eCommerce Product Operations Analyst at <span class="hl">Front Row</span>, where I help ship operational features for our SaaS tools while partnering with clients on their eCommerce needs. Outside of that, I run <span class="hl">2DEGREES</span>, one of NYC's top third-space hospitality groups, where we've hosted <span class="hl">30,000+</span> people across <span class="hl">60+</span> sold-out events.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">View my work</a>
+        <a href="mailto:patrickjmvtran@gmail.com" class="btn-secondary">Let's talk</a>
+      </div>
+    </div>
+
+    <div class="hero-right fade-up" style="transition-delay:0.15s">
+      <p style="font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--matcha);margin-bottom:12px;">A little about myself!</p>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.loom.com/embed/8ca507c097f7434f9cc5a7e8f4c89e04?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
+          frameborder="0"
+          allowfullscreen
+          style="position:absolute;inset:0;width:100%;height:100%;border-radius:18px;"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ── Work / Projects ── -->
+  <section id="work">
+    <p class="section-eyebrow fade-up">Work &amp; Projects</p>
+    <h2 class="section-heading fade-up">Where I've built things.</h2>
+    <p class="section-sub fade-up">A mix of full-time roles and ventures - each one grounded in shipping product, driving growth, and making the narrative stick.</p>
+
+    <div class="work-grid">
+
+      <!-- Front Row -->
+      <a class="work-card fade-up" href="https://www.frontrowgroup.com/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
+        <div class="work-card-left">
+          <div class="work-card-icon">🛒</div>
+          <div class="work-card-company">Front Row</div>
+          <div class="work-card-title">eCommerce Product Operations Analyst</div>
+          <span class="work-card-tag">Full-time</span>
+        </div>
+        <div class="work-card-right">
+          <p class="work-card-desc">
+            Spearheaded operationl strategy for high-growth Amazon brands including Zevo, NeuroGum, FlavCity, and Seed, while shipping internal inventory features in Catapult, our client-facing SaaS platform. Deployed automated content monitoring across 5K+ SKUs to maintain a ~100% Buy Box win rate, and built SQL dashboards to drive cross-functional business decisions.
+          </p>
+          <div class="work-card-metrics">
+            <div class="metric"><span class="metric-val">20</span><span class="metric-label">Brands worked on</span></div>
+            <div class="metric"><span class="metric-val">5</span><span class="metric-label">$80M+ revenue brands</span></div>
+            <div class="metric"><span class="metric-val">~100%</span><span class="metric-label">Buy Box rate</span></div>
+          </div>
+          <div class="work-card-tags">
+            <span class="skill-tag">Product Ops</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Amazon Seller Central</span>
+            <span class="skill-tag">SaaS</span>
+            <span class="skill-tag">Data Dashboards</span>
+          </div>
+        </div>
+        <div class="work-card-arrow">
+          <div class="arrow-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- 2Degrees NYC -->
+      <a class="work-card fade-up" href="https://www.2degreesnyc.com/" target="_blank" rel="noopener" style="transition-delay:0.08s;text-decoration:none;color:inherit;">
+        <div class="work-card-left">
+          <div class="work-card-icon">🎉</div>
+          <div class="work-card-company">2Degrees NYC</div>
+          <div class="work-card-title">Founder &amp; Event Producer</div>
+          <span class="work-card-tag">Founder</span>
+        </div>
+        <div class="work-card-right">
+          <p class="work-card-desc">
+            Bootstrapped a NYC events startup from $70K to $300K+ projected revenue in 2026 with zero paid ads. Built an in-house ticketing platform on Webflow and Stripe with dynamic pricing, music requests, and attendee data capture. Grew to 20K Instagram followers through organic social, hosting 30,000+ people across 60+ sold-out events.
+          </p>
+          <div class="work-card-metrics">
+            <div class="metric"><span class="metric-val">20K</span><span class="metric-label">Organic IG followers</span></div>
+            <div class="metric"><span class="metric-val">$300K+</span><span class="metric-label">Projected revenue 2026</span></div>
+            <div class="metric"><span class="metric-val">30,000+</span><span class="metric-label">People hosted</span></div>
+          </div>
+          <div class="work-card-tags">
+            <span class="skill-tag">GTM</span>
+            <span class="skill-tag">Webflow + Stripe</span>
+            <span class="skill-tag">Social Media Strategy</span>
+            <span class="skill-tag">Klaviyo</span>
+            <span class="skill-tag">Design</span>
+            <span class="skill-tag">P&amp;L</span>
+          </div>
+        </div>
+        <div class="work-card-arrow">
+          <div class="arrow-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- UGC / Personal Content -->
+      <a class="work-card fade-up" href="https://patrickletran.github.io/ugc-portfolio/" target="_blank" rel="noopener" style="transition-delay:0.16s; text-decoration:none; color:inherit;">
+        <div class="work-card-left">
+          <div class="work-card-icon">🎬</div>
+          <div class="work-card-company">Personal</div>
+          <div class="work-card-title">UGC &amp; Content Creation</div>
+          <span class="work-card-tag">Creator</span>
+        </div>
+        <div class="work-card-right">
+          <p class="work-card-desc">
+            Building my personal brand as a live experiment in distribution. Creating user-generated content through short-form video that feels genuine but intentional. View my portfolio to see my work!
+          </p>
+          <div class="work-card-metrics">
+            <div class="metric"><span class="metric-val">7K</span><span class="metric-label">TikTok followers</span></div>
+            <div class="metric"><span class="metric-val">5</span><span class="metric-label">Brand partnerships</span></div>
+            <div class="metric"><span class="metric-val">231K</span><span class="metric-label">Likes</span></div>
+          </div>
+          <div class="work-card-tags">
+            <span class="skill-tag">UGC</span>
+            <span class="skill-tag">Short-form video</span>
+            <span class="skill-tag">Brand storytelling</span>
+            <span class="skill-tag">Scripting</span>
+            <span class="skill-tag">Content strategy</span>
+            <span class="skill-tag">Video Editing</span>
+          </div>
+        </div>
+        <div class="work-card-arrow">
+          <div class="arrow-link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 13L13 3M13 3H6M13 3V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ── Articles ── -->
+  <section id="articles">
+    <p class="section-eyebrow fade-up">Product Articles</p>
+    <h2 class="section-heading fade-up">Thinking out loud.</h2>
+    <p class="section-sub fade-up">Written pieces on product strategy, growth, and the intersection of data and marketing. More coming soon.</p>
+
+    <div class="articles-grid">
+
+      <a class="article-card fade-up" href="articles/operating-at-two-levels.html" style="transition-delay:0s;text-decoration:none;color:inherit;">
+        <div class="article-card-img" style="background: linear-gradient(135deg, #D6E8D8 0%, #EDE7D9 100%);">✍️</div>
+        <div class="article-card-body">
+          <span class="article-card-cat">Personal Essay</span>
+          <h3 class="article-card-title">Why operating at two levels made me a better professional</h3>
+          <p class="article-card-desc">Most professionals live at one altitude. I've been doing both at the same time, and it's changed how I think about work entirely.</p>
+        </div>
+        <div class="article-card-footer">
+          <span style="font-size:0.78rem;font-weight:600;color:var(--matcha-dark);">Read →</span>
+          <span>6 min read</span>
+        </div>
+      </a>
+
+      <a class="article-card fade-up" href="articles/distribution-is-king.html" style="transition-delay:0.1s;text-decoration:none;color:inherit;">
+        <div class="article-card-img" style="background: linear-gradient(135deg, #EDE7D9 0%, #D6E8D8 100%);">👑</div>
+        <div class="article-card-body">
+          <span class="article-card-cat">Product &amp; GTM</span>
+          <h3 class="article-card-title">Distribution is king</h3>
+          <p class="article-card-desc">A great product used to be enough. In a world where AI can help anyone build anything, it no longer is. The new competitive edge is distribution.</p>
+        </div>
+        <div class="article-card-footer">
+          <span style="font-size:0.78rem;font-weight:600;color:var(--matcha-dark);">Read →</span>
+          <span>6 min read</span>
+        </div>
+      </a>
+
+      <a class="article-card fade-up" href="articles/amazon-is-not-optional.html" style="transition-delay:0.2s;text-decoration:none;color:inherit;">
+        <div class="article-card-img" style="background: linear-gradient(135deg, #D6E8D8 0%, #F5F0E8 100%);">📦</div>
+        <div class="article-card-body">
+          <span class="article-card-cat">eCommerce</span>
+          <h3 class="article-card-title">Amazon is not optional anymore</h3>
+          <p class="article-card-desc">Malls are dying, foot traffic is down, and yet more money is moving through ecommerce than ever. If you're not thinking seriously about where people actually shop, you're already behind.</p>
+        </div>
+        <div class="article-card-footer">
+          <span style="font-size:0.78rem;font-weight:600;color:var(--matcha-dark);">Read →</span>
+          <span>5 min read</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-left">
+      <div class="footer-name">Patrick Le-Tran</div>
+      <p class="footer-tagline">Product, growth, and marketing strategy.<br />Based in New York City.</p>
+      <a href="mailto:patrickjmvtran@gmail.com" class="footer-email">patrickjmvtran@gmail.com</a>
+    </div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/patrickletan" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#work">Work</a>
+        <a href="#articles">Articles</a>
+        <a href="mailto:patrickjmvtran@gmail.com">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 Patrick Le-Tran</div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
